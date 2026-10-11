@@ -9,6 +9,7 @@ Vamos utilizar as seguintes bibliotecas:
 - TailwindCSS: Estilização
 - Date-FNS: Manipulação e formatação de datas/horas
 - Shadcn: Componentização base (design system)
+- React Query: Criação e gestão de query para ler dados da API e mutations para alterar dados.
 
 ## Back-End
 Vamos utilizar as seguintes bibliotecas:
@@ -16,6 +17,7 @@ Vamos utilizar as seguintes bibliotecas:
 - Next.js: framework para criação de APIs
 - Crypto: geração de salt + hash das senhas
 - Mastra.ai: Criação e customização de agentes internos
+- TRPC: Gestão de end-points
 
 ## Banco de Dados
 Supabase: PostgresQL
