@@ -33,19 +33,29 @@ Criação do fluxo de criação de contas da plataforma, é necessário fornecer
 ## Requisitos não funcionais
 - Segurança: Salvar as senhas de forma segura no banco de dados
   - Receber dados do cliente de forma segura usando https (previnir network sniffing e ataques man-in-the-middle)
-  - 
+  - UI/UX: Boa esperiencia de uso atraves de uma interface bonita, elegante e moderna
+  - Performance: o processo de criação de conta precisa ser rapido
 
 ## Você deve
-TODO
+- Criar a base do projeto com um endpoint inicial para criação de conta
+- Criar a base do projeto com uma pagina inicial para a interface de criação de conta
+- configurar as bibliotecas base
 
 ## Você não deve
-TODO
+- Implementar qualquer outra funcionalidade que nao esteja relacionada com signup (criação de contas)
+- Não vamos realizar envios de email no momento. Apenas processar a requisição, salvar no banco de dados e retornar um sucesso
 
 ## Tecnologias (stack)
-React.js, Next.js, React-hook-form, shadcn, tailwindcss, supabase, TRPC
+React.js, Next.js, React-hook-form, shadcn, tailwindcss, supabase, TRPC, Bunjs
 
 ## Critérios de aceitação
-TODO
+- Temos uma pagina para criar a nova conta em `/auth/sign-up`
+- A pagina contem um formulario com validação
+- A plataforma consegue se comunicar com a API para enviar os dados e receber uma resposta
+- Estamos informando possiveis erros
+  - Mostrar alert em vermelho no formulário
+- Estamos informando o sucesso de criação da conta
+  - Navegar para `/auth/sign-up/success`
 
 ## Resultado
-TODO
+- Pessoas conseguem criar uma nova conta na plataforma
