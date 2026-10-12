@@ -1,0 +1,57 @@
+# Dependencies
+node_modules/
+.pnp/
+.pnp.js
+
+# Production builds
+.next/
+out/
+
+# Dependency lockfile
+# For Yarn (1+ and 2+)/Pnpm/Yarn 3
+yarn.lock
+package-lock.json
+pnpm-lock.yaml
+
+# Environment variables
+.env*
+.local.env*
+
+# Next.js specific
+.next/
+out/
+*.local
+
+# TypeScript
+*.tsbuildinfo
+*.tsbuildinfo.*
+
+# Supabase
+supabase/functions/*
+!.gitkeep
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Biome
+.biome.json
+
+# Docker (if applicable)
+Dockerfile*
+docker-compose.yml
+
+# Database
+*.sql
+
+# Turborepo (if monorepo)
+.turbo/
+
+# Husky
+.lock-wscript
+
+# npm/ bun
+.bun

@@ -15,7 +15,7 @@ Vamos utilizar as seguintes bibliotecas:
 Vamos utilizar as seguintes bibliotecas:
 - Typescript: desenvolvimento com tipagem
 - Next.js: framework para criação de APIs
-- Crypto: geração de salt + hash das senhas
+- Bcrypt: geração de salt + hash das senhas
 - Mastra.ai: Criação e customização de agentes internos
 - TRPC: Gestão de end-points
 
