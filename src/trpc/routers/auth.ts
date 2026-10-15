@@ -1,8 +1,11 @@
 import { hashPassword } from '@/lib/auth/password';
+import { nanoid } from 'nanoid';
 import { publicProcedure, router } from '@/trpc/init';
 import { TRPCError } from '@trpc/server';
-import { nanoid } from 'nanoid';
 import { z } from 'zod';
+import { cookies } from 'next/headers';
+import { supabaseAdmin } from '@/lib/supabase-admin';
+import bcrypt from 'bcryptjs';
 
 const signUpSchema = z
   .object({
@@ -16,6 +19,11 @@ const signUpSchema = z
     message: 'As senhas não coincidem',
     path: ['confirmPassword'],
   });
+
+const signInSchema = z.object({
+  email: z.string().email('Email inválido'),
+  password: z.string().min(1, 'Senha é obrigatória'),
+});
 
 export const authRouter = router({
   signUp: publicProcedure.input(signUpSchema).mutation(async ({ input, ctx }) => {
@@ -64,5 +72,49 @@ export const authRouter = router({
     }
 
     return { success: true, userId: id };
+  }),
+
+  signIn: publicProcedure.input(signInSchema).mutation(async ({ input }) => {
+    const { email, password } = input;
+
+    // Query accounts table for the user
+    const { data: user, error } = await supabaseAdmin
+      .from('accounts')
+      .select('*')
+      .eq('email', email)
+      .single();
+
+    if (error || !user) {
+      throw new TRPCError({
+        code: 'UNAUTHORIZED',
+        message: 'Email ou senha inválidos',
+      });
+    }
+
+    // Verify password using bcrypt
+    const valid = await bcrypt.compare(password, user.password);
+
+    if (!valid) {
+      throw new TRPCError({
+        code: 'UNAUTHORIZED',
+        message: 'Email ou senha inválidos',
+      });
+    }
+
+    // Set Next.js session cookie
+    const cookieStore = cookies();
+    cookieStore.set('next-auth.session', JSON.stringify({
+      id: user.id,
+      email: user.email,
+      name: `${user.first_name} ${user.last_name}`,
+    }), {
+      httpOnly: true,
+
+      sameSite: 'lax',
+      path: '/',
+      maxAge: 60 * 60 * 24 * 30, // 30 days
+    });
+
+    return { success: true, user: { id: user.id, email: user.email, name: `${user.first_name} ${user.last_name}` } };
   }),
 });

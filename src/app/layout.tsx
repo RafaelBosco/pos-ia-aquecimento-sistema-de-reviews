@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { Providers } from './providers';
+import { AuthHeader } from '@/components/header/auth-header';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' });
 
@@ -25,6 +26,7 @@ export default function RootLayout({
   return (
     <html lang='pt-BR' suppressHydrationWarning>
       <body className={`${inter.variable} font-sans antialiased`}>
+        <AuthHeader className='mb-4' />
         <Providers>{children}</Providers>
       </body>
     </html>

@@ -1,0 +1,3 @@
+supabase_project_ref = "LX83pg0wrxpHvqIg"
+database_url = "postgresql://postgres:password@db.qjeszacyllsklonrqhur.supabase.co:5452/postgres"
+publish = ["public"]
